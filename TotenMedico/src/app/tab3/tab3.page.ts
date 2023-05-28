@@ -13,8 +13,13 @@ export class Tab3Page {
 
   async fazerChamadaAPI() {
     try {
-      const response = await this.http.get<any>('URL_DA_API').toPromise();
-      const mensagem = response.message;
+      const request = {
+        method: "GET",
+        header: {'Content-Type': 'application/json'},
+        body: {"tipoSenha": "SG" }
+      }
+      const response = await this.http.get<any>('https://localhost:3000/api/senha').toPromise();
+      const mensagem = response;
       return mensagem;
       // Faça algo com a mensagem obtida da API
     } catch (error) {
