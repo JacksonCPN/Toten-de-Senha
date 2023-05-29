@@ -18,12 +18,12 @@
   PRIORITARIA
   <br>
   <br>
-  <ion-button id="present-alert1"> Gerar Senha <ion-icon slot="end" name="ticket-outline"></ion-icon></ion-button>
+  <ion-button id="present-alert1" (click)="cadastrarSenha('SP')"> Gerar Senha <ion-icon slot="end" name="ticket-outline"></ion-icon></ion-button>
 <ion-alert
   trigger="present-alert1"
   header="AVISO!"
   subHeader="Senha Gerada"
-  subHeader="Variavel"
+  subHeader="BRAZINO"
   message="Aguardar ser chamado na recepção"
 ></ion-alert>
 <br>
@@ -34,7 +34,7 @@
 GERAL
 <br>
 <br>
-<ion-button id="present-alert2"> Gerar Senha <ion-icon slot="end" name="ticket-outline"></ion-icon></ion-button>
+<ion-button id="present-alert2" (click)="cadastrarSenha('SG')"> Gerar Senha <ion-icon slot="end" name="ticket-outline"></ion-icon></ion-button>
 <ion-alert
   trigger="present-alert2"
   header="AVISO!"
@@ -49,7 +49,7 @@ GERAL
 EXAMES
 <br>
 <br>
-<ion-button id="present-alert3"> Gerar Senha <ion-icon slot="end" name="ticket-outline"></ion-icon></ion-button>
+<ion-button id="present-alert3" (click)="cadastrarSenha('SE')"> Gerar Senha <ion-icon slot="end" name="ticket-outline"></ion-icon></ion-button>
 <ion-alert
   trigger="present-alert3"
   header="AVISO!"
