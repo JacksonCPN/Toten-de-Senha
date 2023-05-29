@@ -8,17 +8,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class Tab2Page {
 
-  items: any[] = [
-    { title: 'Senha 1', guiche: 'Guichê 1', hora: '16:03' },
-    { title: 'Senha 2', guiche: 'Guichê 2', hora: '16:03' },
-    { title: 'Senha 3', guiche: 'Guichê 3', hora: '16:03' },
-    { title: 'Senha 4', guiche: 'Guichê 4', hora: '16:03' },
-    { title: 'Senha 5', guiche: 'Guichê 5', hora: '16:03' }
-  ];
+  items: any[] = [];
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit(){
+  ionViewWillEnter(){
     this.getDataFromAPI();
   }
 

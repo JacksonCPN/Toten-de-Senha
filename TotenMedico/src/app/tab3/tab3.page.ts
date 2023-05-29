@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-tab3',
@@ -8,46 +8,41 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-
   constructor(private alertController: AlertController, private http: HttpClient) {}
 
-  async fazerChamadaAPI() {
-    try {
-      const request = {
-        method: "GET",
-        header: {'Content-Type': 'application/json'},
-        body: {"tipoSenha": "SG" }
+  async fazerChamadaAPI(guiche:string) {
+    console.log(guiche);
+    this.http.get<any>('http://localhost:3000/api/senha/chamar?guiche=${guiche}').subscribe(
+      async response => {
+        const senha = response.senha;
+
+        const alert = await this.alertController.create({
+          header: 'Senha Chamada:',
+          message: senha,
+          buttons: ['OK']
+        });
+
+        await alert.present();
+      },
+      async (error: HttpErrorResponse) => {
+        if (error.status === 404) {
+          const alert = await this.alertController.create({
+            header: 'Erro',
+            message: 'Não ha Senhas Disponiveis.',
+            buttons: ['OK']
+          });
+
+          await alert.present();
+        } else {
+          const alert = await this.alertController.create({
+            header: 'Erro',
+            message: 'Ocorreu um erro na chamada da API.',
+            buttons: ['OK']
+          });
+
+          await alert.present();
+        }
       }
-      const response = await this.http.get<any>('https://localhost:3000/api/senha').toPromise();
-      const mensagem = response;
-      return mensagem;
-      // Faça algo com a mensagem obtida da API
-    } catch (error) {
-      console.error(error);
-      // Lida com o erro, se necessário
-    }
+    );
   }
-
-  async exibirAlerta() {
-    const mensagem = await this.fazerChamadaAPI();
-
-    const alert = await this.alertController.create({
-      header: 'Senha Chamada:',
-      message: mensagem, // TODO: Alterar depois para consumir do back
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
-
-  async exibirAlertaErro() {
-    const alert = await this.alertController.create({
-      header: 'Erro',
-      message: 'Erro no APP',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
-
 }
