@@ -12,7 +12,7 @@ export class Tab3Page {
 
   async fazerChamadaAPI(guiche:string) {
     console.log(guiche);
-    this.http.get<any>('http://localhost:3000/api/senha/chamar?guiche=${guiche}').subscribe(
+    this.http.get<any>(`http://localhost:3000/api/senha/chamar/${guiche}`).subscribe(
       async response => {
         const senha = response.senha;
 
